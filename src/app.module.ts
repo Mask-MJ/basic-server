@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
+import { SystemModule } from './system/system.module';
+import { APP_GUARD } from '@nestjs/core';
+import { PoliciesGuard } from './common/policies/guards/policies.guard';
 import { CaslModule } from './common/casl/casl.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [CaslModule, UsersModule],
+  imports: [SystemModule, CaslModule],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: PoliciesGuard }],
 })
 export class AppModule {}

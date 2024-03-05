@@ -20,13 +20,13 @@ export class CaslAbilityFactory {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(
       createPrismaAbility,
     );
-    if (user.isAdmin) {
+    if (user?.isAdmin) {
       can(Action.Manage, 'all'); // read-write access to everything
     } else {
       can(Action.Read, 'all'); // read-only access to everything
     }
     // can(Action.Update, Article, { authorId: user.id });
-    cannot(Action.Delete, 'Menu');
+    cannot(Action.Delete, 'User');
     return build({
       detectSubjectType: (object) =>
         object.constructor as unknown as ExtractSubjectType<AppSubjects>,
