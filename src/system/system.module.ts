@@ -9,10 +9,10 @@ import { PrismaModule } from 'nestjs-prisma';
 import { MenusService } from './menus/menus.service';
 import { MenusController } from './menus/menus.controller';
 import { RouterModule } from '@nestjs/core';
-import { CaslModule } from 'src/common/casl/casl.module';
+import { AbilityModule } from 'src/common/ability/ability.module';
 @Module({
   imports: [
-    CaslModule,
+    AbilityModule,
     PrismaModule,
     RouterModule.register([{ path: 'system', module: SystemModule }]),
   ],

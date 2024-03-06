@@ -15,8 +15,8 @@ export enum Action {
 }
 
 @Injectable()
-export class CaslAbilityFactory {
-  createForUser(user: User) {
+export class AbilityFactory {
+  createForUser(user?: User) {
     const { can, cannot, build } = new AbilityBuilder<AppAbility>(
       createPrismaAbility,
     );
@@ -24,9 +24,9 @@ export class CaslAbilityFactory {
       can(Action.Manage, 'all'); // read-write access to everything
     } else {
       can(Action.Read, 'all'); // read-only access to everything
+      cannot(Action.Delete, 'User');
     }
     // can(Action.Update, Article, { authorId: user.id });
-    cannot(Action.Delete, 'User');
     return build({
       detectSubjectType: (object) =>
         object.constructor as unknown as ExtractSubjectType<AppSubjects>,
